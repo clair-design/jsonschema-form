@@ -1,0 +1,17 @@
+{
+  "name": "jsonschema-form",
+  "version": "1.0.0",
+  "description": "A Vue.js component to generate HTML form using JSON schema.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jsonschema",
+    "Vue",
+    "form",
+    "Clair"
+  ],
+  "author": "webzhao@gmail.com",
+  "license": "MIT"
+}
