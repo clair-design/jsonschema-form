@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-bg-gray-1">
 <head>
   <meta charset="UTF-8">
   <title>JSON schema form</title>
   <link rel="stylesheet" href="https://unpkg.com/clair@0.2.12/dist/clair.css">
+  <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    iframe {
+      position: absolute;
+      width: 360px;
+      height: 640px;
+      top: 2em;
+      right: 2em
+    }
+    .c-uploader {
+      display: inline
+    }
+  </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app" class="has-padding-lg">
+    <c-box size="lg">
+      <c-box-item class="c-card has-padding-lg">
+        <schema-form :schema="schema" v-model="value" @input="onInput" :form-props="formProps" />
+      </c-box-item>
+      <c-box-item width="380px">
+      </c-box-item>
+    </c-box>
+        <pre>{{ value }}</pre>
+  </div>
+  <iframe frameborder="0" scrolling="no" src="preview.html"></iframe>
   <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/clair@0.2.12/dist/clair.js"></script>
+  <script src="uploader.js"></script>
   <script src="../dist/jsonschema-form.js"></script>
   <script src="app.js"></script>
 </body>

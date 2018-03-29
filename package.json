@@ -4,7 +4,10 @@
   "description": "A Vue.js component to generate HTML form using JSON schema.",
   "main": "dist/jsonschema-form.js",
   "scripts": {
-    "watch": "rollup index.js --o dist/jsonschema-form.js -f umd --name 'JSONSchemaForm' -w"
+    "build": "rollup index.js --o dist/jsonschema-form.js -f umd --name 'JSONSchemaForm'",
+    "watch": "rollup index.js --o dist/jsonschema-form.js -f umd --name 'JSONSchemaForm' -w",
+    "start": "npm run watch & npm run server",
+    "server": "live-server  --port=8081 --watch=dist,examples --open=/examples"
   },
   "keywords": [
     "jsonschema",
@@ -15,7 +18,10 @@
   "author": "webzhao@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "clair": "^0.2.12",
+    "clair": "^0.2.12"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0",
     "rollup": "^0.57.1"
   }
 }
