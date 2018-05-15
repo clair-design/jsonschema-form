@@ -1,0 +1,51 @@
+{
+  "title": "Nested object",
+  "type": "object",
+  "required": [
+    "userName",
+    "password"
+  ],
+  "properties": {
+    "traveler": {
+      "type": "object",
+      "title": "Traveler Info",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Last Name"
+        },
+        "passport": {
+          "type": "string",
+          "title": "Passpaort"
+        }
+      }
+    },
+    "payment": {
+      "type": "object",
+      "title": "Payment",
+      "properties": {
+        "creditNo": {
+          "type": "string",
+          "title": "Card number"
+        },
+        "holderName": {
+          "type": "string",
+          "title": "Cardholder name"
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date",
+          "title": "Expiration date"
+        }
+      }
+    },
+    "captcha": {
+      "type": "string",
+      "title": "Captcha"
+    }
+  }
+}

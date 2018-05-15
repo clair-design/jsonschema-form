@@ -1,0 +1,62 @@
+{
+  "title": "Different data types and formats",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "theme": {
+      "type": "string",
+      "format": "color",
+      "default": "#ffcc00"
+    },
+    "logo": {
+      "type": "string",
+      "format": "image",
+      "description": "400x400, within 1M"
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 200,
+      "description": "cm",
+      "default": 170
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "default": "M"
+    },
+    "city": {
+      "type": "string",
+      "enum": [
+        "Beijing",
+        "Chengdu",
+        "Guangzhou",
+        "Hangzhou",
+        "Nanjing",
+        "Shanghai",
+        "Shenzhen",
+        "Wuhan",
+        "Xi'an"
+      ]
+    },
+    "subscribe": {
+      "type": "boolean"
+    }
+  }
+}

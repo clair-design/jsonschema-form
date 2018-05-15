@@ -6,33 +6,63 @@
   <link rel="stylesheet" href="https://unpkg.com/clair@0.2.12/dist/clair.css">
   <link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <style>
-    iframe {
-      position: absolute;
-      width: 360px;
-      height: 640px;
-      top: 2em;
-      right: 2em
-    }
     .c-uploader {
       display: inline
+    }
+    .c-slider {
+      width: 24em;
+      margin: 1em 0 1em 0.3em;
+      display: inline-block;
+    }
+    .code {
+      height: 15em;
+      overflow: auto;
+      overscroll-behavior: none;
+      white-space: pre;
+      font-family: Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    }
+    .array-item {
+      display: flex;
+      padding: 1em 1em 0 1em;
+      margin-top: 1em;
+      background: #eee;
+    }
+    .array-item__body {
+      flex: 1;
     }
   </style>
 </head>
 <body>
-  <div id="app" class="has-padding-lg">
-    <c-box size="lg">
-      <c-box-item class="c-card has-padding-lg">
-        <schema-form :schema="schema" v-model="value" @input="onInput" :form-props="formProps" />
-      </c-box-item>
-      <c-box-item width="380px">
-      </c-box-item>
-    </c-box>
-        <pre>{{ value }}</pre>
+  <div id="app" class="has-padding-top-lg">
+    <c-container>
+      <div>
+        <c-radio-group :options="options" v-model="schemaName" button></c-radio-group>
+      </div>
+      <c-box gap="2em" class="has-margin-top-md">
+        <c-box-item>
+          <c-card>
+            <h3 slot="title">JSON Schema</h3>
+            <div class="code">{{ schema }}</div>
+          </c-card>
+          <c-card class="has-margin-top-lg">
+            <h3 slot="title">Form Data</h3>
+            <div class="code">{{ value }}</div>
+          </c-card>
+        </c-box-item>
+        <c-box-item>
+          <schema-form
+            class="c-card has-padding-lg"
+            :schema="schema"
+            v-model="value"
+            :form-props="formProps"
+          ></schema-form>
+        </c-box-item>
+      </c-box>
+    </c-container>
   </div>
-  <iframe frameborder="0" scrolling="no" src="preview.html"></iframe>
   <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/clair@0.2.12/dist/clair.js"></script>
-  <script src="uploader.js"></script>
+  <script src="uploader.js"></script> <!-- will be replaced by c-upload -->
   <script src="../dist/jsonschema-form.js"></script>
   <script src="app.js"></script>
 </body>

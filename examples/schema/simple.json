@@ -1,0 +1,22 @@
+{
+  "title": "A simple login form",
+  "type": "object",
+  "required": [
+    "userName",
+    "password"
+  ],
+  "properties": {
+    "userName": {
+      "type": "string",
+      "title": "User Name"
+    },
+    "password": {
+      "type": "string",
+      "title": "Password"
+    },
+    "captcha": {
+      "type": "string",
+      "title": "Captcha"
+    }
+  }
+}

@@ -19,11 +19,15 @@ const schema = {
 
 export default {
   data () {
-    return { schema }
+    return {
+      schema,
+      data: {}
+    }
   },
   components: {
     'schema-form': JSONSchemaForm
   },
-  template: `<schema-form :schema="schema" />`
+  template: `<schema-form :schema="schema" v-model="data" />`
 }
 ```
+

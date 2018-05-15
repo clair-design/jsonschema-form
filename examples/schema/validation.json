@@ -1,0 +1,59 @@
+{
+  "title": "Data Validation",
+  "type": "object",
+  "required": [
+    "firstName",
+    "lastName"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 20,
+      "description": "5 to 20 characters"
+    },
+    "mobile": {
+      "type": "string",
+      "pattern": "^1\\d{10}$",
+      "description": "Mobile phone number"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000,
+      "multipleOf": 100,
+      "description": "Multiple of 100"
+    },
+    "theme": {
+      "type": "string",
+      "format": "color",
+      "default": "#ffcc00"
+    },
+    "logo": {
+      "type": "string",
+      "format": "image",
+      "description": "400x400, within 1M"
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 200,
+      "description": "cm",
+      "default": 170
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "default": "M"
+    },
+    "subscribe": {
+      "type": "boolean"
+    }
+  }
+}

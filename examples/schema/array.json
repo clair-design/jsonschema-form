@@ -1,0 +1,38 @@
+{
+  "title": "Array",
+  "type": "object",
+  "required": [
+    "userName",
+    "password"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "title": "Tags",
+      "default": ["haha", "hehe"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "visits": {
+      "type": "array",
+      "title": "Visits",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "url"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}
