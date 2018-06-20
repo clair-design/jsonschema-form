@@ -1,4 +1,4 @@
-import { capitalize, setProp, getProp, getDefaultValue } from './src/util'
+import {capitalize, setProp, getProp, getDefaultValue} from './src/util'
 
 export default {
 
@@ -45,8 +45,8 @@ export default {
     }
   },
 
-  render (h) {
-    const { schema } = this
+  render(h) {
+    const {schema} = this
     const children = []
 
     // input fields
@@ -55,10 +55,10 @@ export default {
 
     // submit button
     const submit = h('c-form-item', {
-      props: { label: ' ' }
+      props: {label: ' '}
     }, [
       h('c-button', {
-        props: { primary: true }
+        props: {primary: true}
       }, '提交'),
       h('c-button', {
         props: {
@@ -90,10 +90,10 @@ export default {
      * @param schema {Object} the json schema Object
      * @param path {String} JSON path of the schema
      */
-    renderSchema (h, schema, path) {
+    renderSchema(h, schema, path) {
       const props = schema.properties || {}
       const level = path.split('.').length
-      const heading = h('div', { class: 'c-form__heading' }, [
+      const heading = h('div', {class: 'c-form__heading'}, [
         schema.title ? h('h' + level, schema.title) : null,
         schema.description ? h('p', schema.description) : null
       ])
@@ -110,8 +110,8 @@ export default {
      * @param propName {String} property name
      * @param schema {Object} JSON schema of the field
      */
-    renderField (h, propName, schema, path) {
-      const { type, title, description } = schema
+    renderField(h, propName, schema, path) {
+      const {type, title, description} = schema
       if (type === 'object') return this.renderSchema(h, schema, path)
       if (type === 'array') return this.renderArray(h, schema, path)
       const label = title || capitalize(propName)
@@ -134,16 +134,23 @@ export default {
     /**
      * render string/number/boolean
      */
-    renderPrimitive (h, schema, path) {
-      const { type, format } = schema
+    renderPrimitive(h, schema, path) {
+      const {type, format} = schema
       const enums = schema.enum // enum is reserved keyword
-      const { value } = this
+      const {value} = this
       const rules = {}
+
+      const propValue = getProp(value, path)
+      if (propValue === undefined) {
+        const defaultValue = 'default' in schema ? schema.default : getDefaultValue(type)
+        setProp(value, path, defaultValue, this)
+      }
 
       // common data object for all type of fields
       const dataObject = {
         props: {
-          value: getProp(value, path) || getDefaultValue(type),
+          // value: getProp(value, path) || ('default' in schema ? schema.default : getDefaultValue(type)),
+          value: propValue,
           rules
         },
         on: {
@@ -157,13 +164,13 @@ export default {
 
       // radio group or select for enumable
       if (Array.isArray(enums)) {
-        const options = enums.map(value => ({ label: value, value }))
+        const options = enums.map(value => ({label: value, value}))
         if (enums.length <= 5) {
           tagName = 'c-radio-group'
-          Object.assign(dataObject.props, { options, button: true })
+          Object.assign(dataObject.props, {options, button: true})
         } else {
           tagName = 'c-select'
-          Object.assign(dataObject.props, { options })
+          Object.assign(dataObject.props, {options})
         }
       }
 
@@ -171,8 +178,8 @@ export default {
       if (type === 'boolean') {
         Object.assign(dataObject.props, {
           options: [
-            { value: 1, label: '是' },
-            { value: 0, label: '否' }
+            {value: 1, label: '是'},
+            {value: 0, label: '否'}
           ],
           button: true
         })
@@ -230,7 +237,7 @@ export default {
       return h(tagName, dataObject)
     },
 
-    renderArray (h, schema, path) {
+    renderArray(h, schema, path) {
       const title = h('h' + path.split('.').length, schema.title)
       const arrayValue = getProp(this.value, path)
       const items = arrayValue.map((value, index) => {
@@ -272,7 +279,7 @@ export default {
       return h('div', [heading, ...items])
     },
 
-    onSubmit (e) {
+    onSubmit(e) {
       e.preventDefault()
       this.$refs.form.isValid()
     }

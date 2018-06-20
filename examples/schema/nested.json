@@ -12,7 +12,8 @@
       "properties": {
         "firstName": {
           "type": "string",
-          "title": "First Name"
+          "title": "First Name",
+          "default": "Tom"
         },
         "lastName": {
           "type": "string",

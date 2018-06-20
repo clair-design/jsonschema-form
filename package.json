@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup index.js --o dist/jsonschema-form.js -f umd --name 'JSONSchemaForm'",
     "watch": "rollup index.js --o dist/jsonschema-form.js -f umd --name 'JSONSchemaForm' -w",
-    "start": "npm run watch & npm run server",
+    "start": "npm run server & npm run watch",
     "server": "live-server  --port=8081 --watch=dist,examples --open=/examples"
   },
   "keywords": [
