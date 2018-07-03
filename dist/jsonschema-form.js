@@ -269,7 +269,8 @@
 
         // color
         if (format === 'color') {
-          dataObject.props.type = 'color';
+          // dataObject.props.type = 'color'
+          tagName = 'c-color-picker';
         }
 
         // pic upload
