@@ -111,7 +111,7 @@
             }
           });
           if (this._isMounted) this.$refs.form.resetValidity();
-          this.$emit('input', value);
+          this.$emit('change', value);
         }
       }
     },
@@ -227,7 +227,7 @@
           on: {
             change: val => {
               setProp(value, path, val, this);
-              this.$emit('input', value);
+              this.$emit('change', value);
             }
           }
         };
@@ -311,7 +311,9 @@
 
       renderArray(h, schema, path) {
         const title = h('h' + path.split('.').length, schema.title);
-        const arrayValue = getProp(this.value, path);
+        const initialValue = getProp(this.value, path);
+        if (!Array.isArray(initialValue)) setProp(this.value, path, [], this);
+        const arrayValue = initialValue || [];
         const items = arrayValue.map((value, index) => {
           const input = this.renderField(h, String(index + 1), schema.items, `${path}[${index}]`);
           const arrayItemBody = h('div', {
