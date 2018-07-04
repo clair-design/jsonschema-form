@@ -221,7 +221,7 @@
         const dataObject = {
           props: {
             // value: getProp(value, path) || ('default' in schema ? schema.default : getDefaultValue(type)),
-            value: propValue,
+            value: getProp(value, path),
             rules
           },
           on: {
