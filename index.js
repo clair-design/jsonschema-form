@@ -1,5 +1,5 @@
 import {capitalize, setProp, getProp, getDefaultValue} from './src/util'
-
+import CustomColorPicker from './src/customColorPicker.js'
 export default {
 
   props: {
@@ -20,7 +20,9 @@ export default {
       default: true
     }
   },
-
+  components: {
+    CustomColorPicker
+  },
   watch: {
     schema: {
       immediate: true,
@@ -137,6 +139,7 @@ export default {
     renderPrimitive(h, schema, path) {
       const {type, format} = schema
       const enums = schema.enum // enum is reserved keyword
+      const options = schema.options
       const {value} = this
       const rules = {}
 
@@ -174,6 +177,12 @@ export default {
         }
       }
 
+      // select for options
+      if (Array.isArray(options)) {
+        tagName = 'c-select'
+        Object.assign(dataObject.props, {options})
+      }
+
       // toggle TODO: replace with toggle component
       if (type === 'boolean') {
         Object.assign(dataObject.props, {
@@ -199,7 +208,8 @@ export default {
       // color
       if (format === 'color') {
         // dataObject.props.type = 'color'
-        tagName = 'c-color-picker'
+        // tagName = 'c-color-picker'
+        tagName = 'CustomColorPicker'
       }
 
       // pic upload

@@ -71,6 +71,66 @@
     return defaultValues[type]
   };
 
+  var CustomColorPicker = {
+    name: 'CustomColorPicker',
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+    },
+    data() {
+      return {
+        inputValue: '#ff0000',
+        color: '#ff0000'
+      }
+    },
+    watch: {
+      value() {
+        this.inputValue = this.value;
+        this.color = this.value;
+        console.log(this.color);
+      }
+    },
+    mounted() {
+      this.color = this.value;
+      this.inputValue = this.value;
+      console.log(this.value);
+      console.log(this.color);
+    },
+    render(h) {
+      console.log(this.color);
+      return h('div', {
+        style: { width: '18em', display: 'inline-block' }
+      }, [h('c-input', {
+        props: {
+          value: this.inputValue
+        },
+        on: {
+          change: val => {
+            if (val) {
+              this.color = val;
+              console.log(val);
+              this.$emit('input', val);
+            }
+          }
+        },
+        style: { display: 'inline-block', width: '15em', verticalAlign: 'inherit' }
+      }), h('c-color-picker', {
+        props: {
+          value: this.color
+        },
+        on: {
+          change: val => {
+            this.inputValue = val;
+            this.$emit('input', val);
+          }
+        },
+        style: { margin: '-2px' }
+      })])
+    }
+  }
+
   var index = {
 
     props: {
@@ -91,7 +151,9 @@
         default: true
       }
     },
-
+    components: {
+      CustomColorPicker
+    },
     watch: {
       schema: {
         immediate: true,
@@ -208,6 +270,7 @@
       renderPrimitive(h, schema, path) {
         const {type, format} = schema;
         const enums = schema.enum; // enum is reserved keyword
+        const options = schema.options;
         const {value} = this;
         const rules = {};
 
@@ -245,6 +308,12 @@
           }
         }
 
+        // select for options
+        if (Array.isArray(options)) {
+          tagName = 'c-select';
+          Object.assign(dataObject.props, {options});
+        }
+
         // toggle TODO: replace with toggle component
         if (type === 'boolean') {
           Object.assign(dataObject.props, {
@@ -270,7 +339,8 @@
         // color
         if (format === 'color') {
           // dataObject.props.type = 'color'
-          tagName = 'c-color-picker';
+          // tagName = 'c-color-picker'
+          tagName = 'CustomColorPicker';
         }
 
         // pic upload
