@@ -74,7 +74,17 @@ export default {
         }
       }, '重置')
     ])
-    if (fields.length) children.push(submit)
+    if (this.$slots.submitBtnBox) {
+      children.push(this.$slots.submitBtnBox)
+    } else 
+    if (fields.length) {
+      if (this.$slots.submitBtnBox) {
+        children.push(this.$slots.submitBtnBox)
+      } else {
+        children.push(submit)
+      }
+    }
+   
 
     return h('c-form', {
       props: this.formProps,
