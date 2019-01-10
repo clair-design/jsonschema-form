@@ -218,8 +218,8 @@ export default {
       // color
       if (format === 'color') {
         // dataObject.props.type = 'color'
-        // tagName = 'c-color-picker'
-        tagName = 'CustomColorPicker'
+        tagName = 'c-color-picker'
+        // tagName = 'CustomColorPicker'
       }
 
       // pic upload
